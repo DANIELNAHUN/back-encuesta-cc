@@ -38,6 +38,7 @@ ALTER TABLE opciones ADD FOREIGN KEY (id_pregunta) REFERENCES preguntas(id_pregu
 CREATE TABLE respuestas(
     id_respuesta INT NOT NULL AUTO_INCREMENT,
     id_oficina INT NOT NULL,
+    id_opcion_cliente INT NOT NULL,
     id_pregunta INT NOT NULL,
     id_opcion INT NOT NULL,
     date_init DATETIME NOT NULL,
@@ -50,16 +51,19 @@ CREATE TABLE respuestas(
 ALTER TABLE respuestas ADD FOREIGN KEY (id_oficina) REFERENCES oficinas(id_oficina);
 ALTER TABLE respuestas ADD FOREIGN KEY (id_pregunta) REFERENCES preguntas(id_pregunta);
 ALTER TABLE respuestas ADD FOREIGN KEY (id_opcion) REFERENCES opciones(id_opcion);
+ALTER TABLE respuestas ADD FOREIGN KEY (id_opcion_cliente) REFERENCES opciones(id_opcion);
 
 CREATE VIEW v_respuestas AS
 SELECT
     r.id_respuesta,
     o.oficina_nombre,
+    op2.texto_opcion as cliente,
     p.texto_pregunta,
-    o.texto_opcion,
+    op.texto_opcion,
     r.date_init,
     r.date_end
 FROM respuestas r
 INNER JOIN oficinas o ON r.id_oficina = o.id_oficina
 INNER JOIN preguntas p ON r.id_pregunta = p.id_pregunta
-INNER JOIN opciones op ON r.id_opcion = op.id_opcion;
+INNER JOIN opciones op ON r.id_opcion = op.id_opcion
+INNER JOIN opciones op2 ON r.id_opcion_cliente = op2.id_opcion;

@@ -28,7 +28,7 @@ class Opciones(Base):
     id_opcion = Column(Integer, primary_key=True, index=True)
     id_pregunta = Column(Integer, ForeignKey("preguntas.id_pregunta"))
     texto_opcion = Column(String(250))
-    image_opcion = Column(String(250))
+    imagen_opcion = Column(String(250))
     active = Column(Boolean)
     created_at = Column(DateTime)
     updated_at = Column(DateTime)
@@ -39,6 +39,7 @@ class Respuestas(Base):
 
     id_respuesta = Column(Integer, primary_key=True, index=True)
     id_oficina = Column(Integer, ForeignKey("oficinas.id_oficina"))
+    id_opcion_cliente = Column(Integer, ForeignKey("opciones.id_opcion"))
     id_pregunta = Column(Integer, ForeignKey("preguntas.id_pregunta"))
     id_opcion = Column(Integer, ForeignKey("opciones.id_opcion"))
     date_init = Column(DateTime)

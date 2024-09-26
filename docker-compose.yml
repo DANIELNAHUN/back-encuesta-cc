@@ -1,7 +1,7 @@
 version: '3.9'
 
 services:
-  back-ventas-cc:
+  back-encuestacc:
     build: .
     container_name: back-encuestacc
     command: sh -c "uvicorn app:app --reload --port=8085 --host=0.0.0.0"

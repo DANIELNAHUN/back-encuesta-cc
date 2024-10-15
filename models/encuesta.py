@@ -12,6 +12,17 @@ class Oficinas(Base):
     updated_at = Column(DateTime)
     deleted_at = Column(DateTime)
 
+class Cajeras(Base):
+    __tablename__ = "cajeras"
+
+    id_cajera = Column(Integer, primary_key=True, index=True)
+    id_oficina = Column(Integer, ForeignKey("oficinas.id_oficina"))
+    cajera_nombre = Column(String(250))
+    active = Column(Boolean)
+    created_at = Column(DateTime)
+    updated_at = Column(DateTime)
+    deleted_at = Column(DateTime)
+
 class Preguntas(Base):
     __tablename__ = "preguntas"
 
@@ -38,6 +49,7 @@ class Respuestas(Base):
     __tablename__ = "respuestas"
 
     id_respuesta = Column(Integer, primary_key=True, index=True)
+    id_cajera = Column(Integer, ForeignKey("cajeras.id_cajera"))
     id_oficina = Column(Integer, ForeignKey("oficinas.id_oficina"))
     id_opcion_cliente = Column(Integer, ForeignKey("opciones.id_opcion"))
     id_pregunta = Column(Integer, ForeignKey("preguntas.id_pregunta"))

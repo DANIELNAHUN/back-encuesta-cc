@@ -10,6 +10,14 @@ class Oficina(BaseModel):
     class Config:
         orm_mode = True
 
+class Cajera(BaseModel):
+    id_cajera: Optional[int] = None
+    id_oficina: Optional[int] = None
+    cajera_nombre: Optional[str] = None
+    active: Optional[bool] = None
+    class Config:
+        orm_mode = True
+
 class Pregunta(BaseModel):
     id_pregunta: Optional[int] = None
     texto_pregunta: Optional[str] = None
@@ -29,6 +37,7 @@ class Opcion(BaseModel):
 class Respuesta(BaseModel):
     id_respuesta: Optional[int] = None
     id_oficina: Optional[int] = None
+    id_cajera: Optional[int] = None
     id_opcion_cliente: Optional[int] = None
     id_pregunta: Optional[int] = None
     id_opcion: Optional[int] = None
